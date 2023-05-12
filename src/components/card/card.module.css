@@ -1,0 +1,20 @@
+.image{
+
+    border-radius: 5%;
+    margin: 20px;
+    transition: transform 0.5s;
+    border: 5px solid;
+    box-shadow: 20px 20px 10px #000;
+
+    
+}
+
+.image:hover{
+
+    transform: rotate(360deg);
+}
+
+.characters{
+
+    color: aliceblue;
+}
