@@ -19,9 +19,7 @@ import Form from './components/Form/Form';
 
 import Favorites from './components/Favorites/Favorite';
 
-const email = "alexis@gmail.com";
-
-const password = "1234567";
+const URL = 'http://localhost:3001/rickandmorty/login';
 
 
 
@@ -33,17 +31,23 @@ function App() {
 
    const [access, setAccess] = useState(false);
 
-  
-   const login = (userData) => {
+  const login = async (userData) => {
 
-      if( userData.email === email && userData.password === password ) {
-
-         setAccess(true);
-
-         navigate('/home');
-      }
-
+   try {
+      const {email, password} = userData;
+      const {data} = await axios(URL + `?email=${email}&password=${password}`);
+      const {access} = data;
+      
+      setAccess(access);
+      access && navigate('/home');
+   
+   } catch (error) {
+      console.log(error.message);
+      
    }
+
+};
+   
 
    useEffect(() => {
       !access && navigate('/');

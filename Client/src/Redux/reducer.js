@@ -1,28 +1,29 @@
-import { ADD_FAVORITE, REMOVE_FAVORITE, FILTER, ORDER} from "./actions";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER} from "./actions";
 
 const initialState = {
     myFavorites: [],
     allCharactersFav:[]
 };
 
-const rootReducer = ( state = initialState, action ) => {
+const rootReducer = ( state = initialState, { type, payload}) => {
 
-    switch ( action.type ) {
+    switch ( type ) {
 
-        case ADD_FAVORITE:
-            return{ ...state, myFavorites: [ ...state.allCharactersFav, action.payload ],
-                allCharactersFav: [...state.allCharactersFav, action.payload ]
+        case ADD_FAV:
+            return{ ...state,
+                 myFavorites: payload,
+                allCharactersFav: payload
             };
 
-            case REMOVE_FAVORITE:
-                return { ...state, myFavorites: state.myFavorites.filter( 
-                    (char) => char.id !== action.payload),
+            case REMOVE_FAV:
+                return { ...state, 
+                    myFavorites:payload
                 };
 
                 case FILTER: 
-                const allCharactersFiltered = state.allCharactersFav.filter(character => character.gender === action.payload)
+                const allCharactersFiltered = state.allCharactersFav.filter(character => character.gender === payload)
                 return {...state, myFavorites: 
-                    action.payload === "allCharacters"
+                    payload === "allCharacters"
                     ? [...state.allCharactersFav]
                     : allCharactersFiltered
                 
@@ -32,7 +33,7 @@ const rootReducer = ( state = initialState, action ) => {
                 const allCharactersFavCopy = [...state.allCharactersFav]
 
                 return { ...state, myFavorites:
-                     action.payload === "A" 
+                     payload === "A" 
                 ? allCharactersFavCopy.sort((a,b)=> a.id - b.id)
                 : allCharactersFavCopy.sort((a,b)=> b.id - a.id)
 

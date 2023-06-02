@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import { connect  } from 'react-redux';
 
-import { addFavorite, removeFavorite } from '../../Redux/actions';
+import { addFav, removeFav } from '../../Redux/actions';
 
 import { useState, useEffect } from 'react';
 
@@ -17,11 +17,11 @@ import { useState, useEffect } from 'react';
 
       if( isFav ) {
          setIsFav( false );
-         removeFavorite(id);
+         removeFav(id);
 
       }else {
          setIsFav( true );
-         addFavorite({
+         addFav({
             id, name, status, species, gender, origin, image, onClose, addFavorite, removeFavorite, myFavorites
          })
       }
@@ -65,9 +65,9 @@ import { useState, useEffect } from 'react';
 const mapDispatchToProps = (dispatch) => { 
 
    return {
-      addFavorite: (character) => { dispatch( addFavorite(character) )},
+      addFavorite: (character) => { dispatch( addFav(character) )},
 
-      removeFavorite: (id) => { dispatch( removeFavorite(id) );
+      removeFavorite: (id) => { dispatch( removeFav(id) );
       },
    };
 };
